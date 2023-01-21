@@ -4,6 +4,8 @@ const port = 4000;
 app.use('/assets',express.static(__dirname + '/assets'));
 app.set('view engine','ejs');
 app.set('views','./views');
+
+// file upload library
 const upload  = require('express-fileupload');
 app.use(upload()) //middlle ware to upload a file
 
