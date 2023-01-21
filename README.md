@@ -26,7 +26,7 @@ Use multer package functionality to upload csv data to server
                 
     
     controllers -->
-               this contains a file home controller
+               This contains a file home controller
                  there mainly two function
                   .home --> this function is to render th home page upon first arrival to website
                   .fileupload -->  this function has 4 parts 
@@ -41,7 +41,7 @@ Use multer package functionality to upload csv data to server
 
 
     uploads -->
-              the uploaded files get stored n this folder
+              The uploaded files get stored n this folder
 
     assets -->
              This has the styling part for the home page
