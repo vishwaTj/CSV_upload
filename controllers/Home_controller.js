@@ -2,23 +2,22 @@ const csv =require('csv-parser');
 const fs = require('fs');
 const results = [];
 
+
+// /function to render the homepage
 module.exports.Home = function(req,res){
-   fs.createReadStream('D:/New_projects/CSV_Upload/uploads/sample_data.csv')
-   .pipe(csv({})).on('data',(data)=> results.push(data))
-   .on('end',()=> {
-      console.log(results);
-   });
+  // Render home page initially sending an empty array
     return res.render('home',{
         message:``,
-        list:results
+        list:[]
     });
 }
 
+
+// Function to upload and display sorted CSV data 
 module.exports.fileupload = function(req,res){
 
     // checking if file ot uploaded
     if(req.files){
-        console.log(req.files);
         var file = req.files.file;
         var filename = file.name;
      
@@ -29,13 +28,18 @@ module.exports.fileupload = function(req,res){
              message:`Error in uploading ${err}`
            })}
            else{
-           console.log(filename);
+
           // loading data from the file the fs stream
           fs.createReadStream(`D:/New_projects/CSV_Upload/uploads/${filename}`)
           .pipe(csv({})).on('data',(data)=> results.push(data))
           .on('end',()=> {
-            // console.log(results);
+
+            // sorting the values in an order to display
+              let sortedProducts = results.sort(
+              (p1, p2) => (p1.id > p2.id) ? 1 : (p1.id < p2.id) ? -1 : 0); 
            });
+
+           // render the home page with CSV data
            return res.render('home',{
             message:`file upload scussessful : ${filename}`,
             list:results
